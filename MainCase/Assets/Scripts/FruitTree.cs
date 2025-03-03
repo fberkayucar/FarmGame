@@ -10,8 +10,8 @@ public class FruitTree : MonoBehaviour
     public float interval = 10f;
     public string treeID;
 
-    private int visibleFruitCount = 0;  // Þu anda aktif olan meyve sayýsý
-    private int collectedFruits = 0;    // Bu aðaçtan satýþa kadar toplanan meyve sayýsý (UI için)
+    private int visibleFruitCount = 0;  
+    private int collectedFruits = 0;    
     private float timer = 0f;
     private GameManager gameManager;
     private InventoryManager inventoryManager;
@@ -32,7 +32,6 @@ public class FruitTree : MonoBehaviour
 
     private void Update()
     {
-        // Süreyle yeni meyveler aktif ediliyor
         if (visibleFruitCount < fruits.Count)
         {
             timer += Time.deltaTime;
@@ -51,22 +50,18 @@ public class FruitTree : MonoBehaviour
         {
             int newlyCollectedFruits = 0;
 
-            // Tüm aktif meyveler üzerinden geçiliyor
             foreach (var fruit in fruits)
             {
                 if (fruit.activeSelf)
                 {
-                    // Her meyve için ödül ver (envanter güncellemesi ve XP eklemesi)
                     GiveRewards(fruit.name);
                     fruit.SetActive(false);
                     newlyCollectedFruits++;
                 }
             }
 
-            // Satýþ yapýlmadýysa, toplanan meyveleri biriktiriyoruz.
             collectedFruits += newlyCollectedFruits;
 
-            // Toplama sayaçlarýný sýfýrlýyoruz ki, sonraki toplamalarda yalnýzca o an aktif meyveler hesaba katsýn.
             visibleFruitCount = 0;
             timer = 0f;
         }
@@ -77,11 +72,10 @@ public class FruitTree : MonoBehaviour
         if (gameManager == null || inventoryManager == null)
             return;
 
-        // Her meyve için ilgili envanter güncelleniyor ve XP ekleniyor.
         if (fruitName.StartsWith("Apple"))
         {
-            inventoryManager.AddApples(1);   // Inventory'deki elma sayýsýný artýrýr
-            gameManager.CollectFruit("Apple"); // XPManager.AddXP(2) çaðrýlýr
+            inventoryManager.AddApples(1);  
+            gameManager.CollectFruit("Apple"); 
         }
         else if (fruitName.StartsWith("Pineapple"))
         {
@@ -95,7 +89,6 @@ public class FruitTree : MonoBehaviour
         }
     }
 
-    // Satýþ sonrasý çaðrýlan metod; bu aðaçtaki UI sayýsýný sýfýrlar.
     public void ResetCollectedFruits()
     {
         collectedFruits = 0;

@@ -4,48 +4,40 @@ using UnityEngine.UI;
 
 public class LoginManager : MonoBehaviour
 {
-    // Inspector'dan atanacak UI elemanlarý
-    [SerializeField] private TMP_InputField usernameInputField; // Kullanýcý adýný gireceði input field
-    [SerializeField] private TextMeshProUGUI usernameDisplayText; // Kullanýcý adýný gösterecek ekran üstü metin
-    [SerializeField] private Button enterButton; // Enter butonu
-    [SerializeField] private GameObject loginScreen; // Giriþ ekraný GameObject’i (kapatýlacak)
+    [SerializeField] private TMP_InputField usernameInputField; 
+    [SerializeField] private TextMeshProUGUI usernameDisplayText; 
+    [SerializeField] private Button enterButton; 
+    [SerializeField] private GameObject loginScreen; 
 
-    private const string USERNAME_KEY = "Username"; // PlayerPrefs için anahtar
+    private const string USERNAME_KEY = "Username";
 
     void Start()
     {
-        // Daha önce kullanýcý adý kaydedilmiþ mi kontrol et
         if (PlayerPrefs.HasKey(USERNAME_KEY))
         {
-            // Kaydedilmiþ kullanýcý adýný al ve doðrudan göster
             string savedUsername = PlayerPrefs.GetString(USERNAME_KEY);
             usernameDisplayText.text = savedUsername;
-            loginScreen.SetActive(false); // Giriþ ekranýný gizle
+            loginScreen.SetActive(false); 
         }
         else
         {
-            // Ýlk kez açýlýyorsa giriþ ekranýný göster ve butona iþlev ekle
             loginScreen.SetActive(true);
-            enterButton.onClick.AddListener(OnEnterButtonClicked); // Butona týklama iþlevi ekle
+            enterButton.onClick.AddListener(OnEnterButtonClicked); 
         }
     }
 
-    // Enter butonuna basýldýðýnda çalýþacak metod
     private void OnEnterButtonClicked()
     {
-        string enteredUsername = usernameInputField.text.Trim(); // Input’tan kullanýcý adýný al ve boþluklarý temizle
-
-        // Kullanýcý adý boþ mu kontrol et
+        string enteredUsername = usernameInputField.text.Trim(); 
         if (string.IsNullOrEmpty(enteredUsername))
         {
-            return; // Boþsa iþlemi durdur
+            return; 
         }
 
-        // Kullanýcý adýný kaydet ve göster
         PlayerPrefs.SetString(USERNAME_KEY, enteredUsername);
-        PlayerPrefs.Save(); // PlayerPrefs’i diske yaz
-        usernameDisplayText.text = enteredUsername; // Ekranýn üstünde göster
-        loginScreen.SetActive(false); // Giriþ ekranýný gizle
+        PlayerPrefs.Save();
+        usernameDisplayText.text = enteredUsername; 
+        loginScreen.SetActive(false); 
 
         Debug.Log("Kullanýcý adý kaydedildi: " + enteredUsername);
     }

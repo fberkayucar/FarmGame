@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public List<TextMeshProUGUI> moneyTexts;
-    public XPManager xpManager; // XPManager referansý
+    public XPManager xpManager; 
 
     private int playerMoney;
     private const string VERSION_KEY = "GameVersion";
@@ -15,20 +15,13 @@ public class GameManager : MonoBehaviour
         string savedVersion = PlayerPrefs.GetString(VERSION_KEY, "");
         if (savedVersion != Application.version)
         {
-            PlayerPrefs.DeleteAll(); // Tüm PlayerPrefs verilerini sil
-            PlayerPrefs.SetString(VERSION_KEY, Application.version); // Yeni versiyonu kaydet
-            PlayerPrefs.Save(); // Deðiþiklikleri diske yaz
+            PlayerPrefs.DeleteAll(); 
+            PlayerPrefs.SetString(VERSION_KEY, Application.version); 
+            PlayerPrefs.Save(); 
             Debug.Log("Yeni build algýlandý, PlayerPrefs sýfýrlandý.");
         }
-        //SÝLMEYÝ UNUTMA.
         LoadMoney();
     }
-
-    //private void Awake()
-    //{
-    //    PlayerPrefs.DeleteAll(); // Tüm PlayerPrefs verilerini sýfýrlar
-    //    PlayerPrefs.Save(); // Deðiþiklikleri kaydeder
-    //}
 
 
     private void LoadMoney()
@@ -68,7 +61,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Meyve toplandýðýnda çaðrýlacak fonksiyon
     public void CollectFruit(string fruitType)
     {
         switch (fruitType)

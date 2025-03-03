@@ -8,7 +8,7 @@ public class XPManager : MonoBehaviour
 
     private int currentLevel = 1;
     private int currentXP = 0;
-    private int requiredXP = 100; // Ýlk seviye için gerekli XP
+    private int requiredXP = 100;
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class XPManager : MonoBehaviour
     {
         currentXP -= requiredXP;
         currentLevel++;
-        requiredXP = Mathf.CeilToInt(requiredXP * 1.2f); // Gereken XP %20 artar
+        requiredXP = Mathf.CeilToInt(requiredXP * 1.2f);
     }
 
     private void LoadXPData()

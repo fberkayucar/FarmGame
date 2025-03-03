@@ -63,7 +63,7 @@ public class ShopManager : MonoBehaviour
 
     private void SaveTreePurchase(string treeKey)
     {
-        PlayerPrefs.SetInt(treeKey, 1); // Aðacýn satýn alýndýðýný kaydet
+        PlayerPrefs.SetInt(treeKey, 1); 
         PlayerPrefs.Save();
     }
 
